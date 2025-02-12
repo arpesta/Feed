@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .star {
+            font-size: 50px;
+            cursor: pointer;
+            color: gray;
+        }
+        .star:hover,
+        .star.active {
+            color: gold;
+        }
+        .response-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>How was your experience?</h1>
+    <p>Please rate our service:</p>
+    <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <p id="response"></p>
+    <script>
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-value');
+                stars.forEach(s => s.classList.remove('active'));
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.add('active');
+                }
+                const response = document.getElementById('response');
+                if (rating == 5) {
+                    response.innerHTML = 'Thank you! <a class="response-link" href="https://g.page/r/CZl7CtM3dhRlEAE/review" target="_blank">Click here to leave a review on Google.</a>';
+                } else {
+                    response.innerHTML = 'Thank you for your feedback! <a class="response-link" href="mailto:info@lapinhinauspalvelu.fi?subject=Service Feedback&body=Please share your experience with us." target="_blank">Click here to send us your feedback via email.</a>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
